@@ -8,6 +8,23 @@
     html, body { margin:0; height:100%; overflow:hidden; background:#111; }
     iframe { position:fixed; inset:0; width:100vw; height:100vh; border:0; display:block; }
   </style>
+  <script>
+  (function(){
+    const PASSWORD = 'usetheforce'; // change this
+    const authenticated = sessionStorage.getItem('authed');
+    if (authenticated === '1') return; // already passed
+
+    document.documentElement.style.visibility = 'hidden';
+    const attempt = prompt('Enter password to view this site:');
+    if (attempt === PASSWORD) {
+      sessionStorage.setItem('authed','1');
+      document.documentElement.style.visibility = 'visible';
+    } else {
+      alert('Incorrect password — you will be redirected.');
+      window.location.href = 'about:blank';
+    }
+  })();
+</script>
 </head>
 <body>
   <iframe id="figmaFrame" allowfullscreen></iframe>
